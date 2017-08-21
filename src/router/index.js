@@ -1,37 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import store from '@/store'
-// import Hello from '@/components/business/Hello'
-
-// import AdminLogin from '@/components/business/admin/Login'
+import routes from './routes'
 
 Vue.use(Router)
 
-const Hello = resolve => {
-  require.ensure(['@/components/business/Hello'], () => {
-    resolve(require('@/components/business/Hello'))
-  })
-}
-
-const AdminLogin = resolve => {
-  require.ensure(['@/components/business/admin/Login'], () => {
-    resolve(require('@/components/business/admin/Login'))
-  })
-}
-
 const router = new Router({
-  routes: [
-    {
-      path: '/',
-      name: 'Hello',
-      component: Hello
-    },
-    {
-      path: '/admin',
-      name: 'Admin',
-      component: AdminLogin
-    }
-  ]
+  routes
 })
 
 // 注册全局钩子拦截导航
