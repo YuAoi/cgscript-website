@@ -16,12 +16,28 @@
 
 // deepEach(routes, route => (route.component = ensure(route.component)))
 
-const routes = [{
+const AdminLayout = resolve => require.ensure([], () => resolve(require('@/components/business/admin/common/Layout')))
+
+const userRoutes = [{
   path: '/',
   component: resolve => require.ensure([], () => resolve(require('@/components/business/Hello')))
+}]
+
+const adminRoutes = [{
+  path: '/admin/login',
+  component: resolve => require.ensure([], () => resolve(require('@/components/business/admin/Login')))
 }, {
   path: '/admin',
-  component: resolve => require.ensure([], () => resolve(require('@/components/business/admin/Login')))
+  component: AdminLayout,
+  children: [{
+    path: 'users',
+    component: resolve => require.ensure([], () => resolve(require('@/components/business/admin/Users')))
+  }, {
+    path: 'about',
+    component: resolve => require.ensure([], () => resolve(require('@/components/business/admin/About')))
+  }]
 }]
+
+const routes = [...userRoutes, ...adminRoutes]
 
 export default routes
